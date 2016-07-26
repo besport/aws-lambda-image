@@ -1,0 +1,45 @@
+{
+  "bucket": "besport-images-processed",
+  "resizes": [
+    {
+      "size": 64,
+      "directory": "resized/64"
+    },
+    {
+      "size": 96,
+      "directory": "resized/96"
+    },
+    {
+      "size": 128,
+      "directory": "resized/128"
+    },
+    {
+      "size": 192,
+      "directory": "resized/192"
+    },
+    {
+      "size": 256,
+      "directory": "resized/256"
+    },
+    {
+      "size": 384,
+      "directory": "resized/384"
+    },
+    {
+      "size": 512,
+      "directory": "resized/512"
+    },
+    {
+      "size": 768,
+      "directory": "resized/768"
+    },
+    {
+      "size": 1024,
+      "directory": "resized/1024"
+    },
+    {
+      "size": 1536,
+      "directory": "resized/1536"
+    }
+  ]
+}

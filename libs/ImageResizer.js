@@ -27,21 +27,17 @@ class ImageResizer {
         const params = {
             srcData:   image.data.toString("binary"),
             srcFormat: image.type,
-            format:    image.type
+            format:    image.type,
+            customArgs: ['+repage', '-strip', '-interlace', 'plane',
+                         '-auto-orient', '-background', 'white', '-flatten']
         };
 
         const acl = this.options.acl;
 
         if ( "size" in this.options ) {
-            params.width = this.options.size;
-        } else {
-            if ( "width" in this.options ) {
-                params.width = this.options.width;
-            }
-            if ( "height" in this.options ) {
-                params.height = this.options.height;
-            }
-        }
+            params.customArgs.push("-resize");
+            params.customArgs.push(String(this.options.size) + "x" + String(this.options.size) + "^>");
+        };
 
         return new Promise((resolve, reject) => {
             ImageMagick.resize(params, (err, stdout, stderr) => {
