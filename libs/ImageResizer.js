@@ -52,6 +52,7 @@ class ImageResizer {
                         image.fileName,
                         image.bucketName,
                         stdout,
+                        image.type,
                         image.headers,
                         acl
                     ));

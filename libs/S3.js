@@ -2,6 +2,7 @@
 
 const ImageData = require("./ImageData");
 const aws       = require("aws-sdk");
+const ImageMagick  = require("imagemagick");
 
 const client  = new aws.S3({apiVersion: "2006-03-01"});
 
@@ -26,13 +27,16 @@ class S3 {
                     return;
                 }
 
+                ImageMagick.identify({data: data.Body}, (err, type) => {
                 resolve(new ImageData(
                     key,
                     bucket,
                     data.Body,
+                    type.format,
                     { ContentType: data.ContentType, CacheControl: data.CacheControl },
                     acl
                 ));
+                });
             });
         });
     }

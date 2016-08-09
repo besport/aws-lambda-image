@@ -13,10 +13,11 @@ class ImageData {
      * @param Object headers
      * @param Object acl
      */
-    constructor(key, name, data, headers, acl) {
+    constructor(key, name, data, type, headers, acl) {
         this._fileName   = key;
         this._bucketName = name;
         this._data       = ( Buffer.isBuffer(data) ) ? data : new Buffer(data, "binary");
+        this._type       = type;
         this._headers    = headers;
         this._acl        = acl;
     }
@@ -70,7 +71,7 @@ class ImageData {
      * @return String
      */
     get type() {
-        return path.extname(this._fileName).slice(1);
+        return this._type;
     }
 
     /**

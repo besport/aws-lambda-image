@@ -49,6 +49,7 @@ class ImageReducer {
                     dir + image.baseName,
                     option.bucket || image.bucketName,
                     buffer,
+                    image.type,
                     image.headers,
                     image.acl
                 ));
