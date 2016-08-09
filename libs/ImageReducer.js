@@ -86,7 +86,7 @@ class ImageReducer {
                 streams.push(new Gifsicle());
                 break;
             default:
-                throw new Error("Unexcepted file type.");
+                throw new Error("Unexcepted file type: " + type);
         }
 
         return streams;
