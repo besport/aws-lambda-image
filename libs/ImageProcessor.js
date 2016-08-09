@@ -63,6 +63,17 @@ class ImageProcessor {
      */
     processImage(imageData, config) {
         const jpegOptimizer = config.get("jpegOptimizer", "mozjpeg");
+
+        if ( this.s3Object.besport ) {
+            var option = {
+                bucket: this.s3Object.besport.bucket_out,
+                size: this.s3Object.besport.size,
+                quality: this.s3Object.besport.quality,
+                jpegOptimizer: jpegOptimizer
+            };
+            return Promise.all([this.execResizeImage(option, imageData)]);
+        };
+
         const promiseList   = config.get("resizes", []).filter((option) => {
             return ( option.size   && option.size   > 0 ) ||
                    ( option.width  && option.width  > 0 ) ||

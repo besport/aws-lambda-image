@@ -1,0 +1,20 @@
+{
+   "Records":[
+      {
+         "s3":{
+            "bucket":{
+               "name":"besport-images-in"
+            },
+            "object":{
+               "key":"file_name_of_image",
+               "size":1024
+            },
+            "besport":{
+               "size": 64,
+               "quality": 85,
+               "bucket_out":"besport-images/64"
+            }
+         }
+      }
+   ]
+}
