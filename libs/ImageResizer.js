@@ -27,7 +27,9 @@ class ImageResizer {
         const params = {
             srcData:   image.data.toString("binary"),
             srcFormat: image.type,
-            format:    image.type
+            format:    image.type,
+            customArgs: ['+repage', '-strip', '-interlace', 'plane',
+                         '-auto-orient', '-background', 'white', '-flatten']
         };
 
         const acl = this.options.acl;
