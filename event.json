@@ -6,13 +6,19 @@
                "name":"besport-images-in"
             },
             "object":{
-               "key":"file_name_of_image",
+               "key":"Y_xnDKPLJuJlaGDQB81rtyBDDuk41d5eac2d75011f1",
                "size":1024
             },
             "besport":{
                "size": 64,
                "quality": 85,
-               "bucket_out":"besport-images/64"
+               "bucket_out": "besport-images/64",
+               "crop": {
+                  "x": 20.0,
+                  "y": 30.0,
+                  "width": 40.0,
+                  "height": 50.0
+               }
             }
          }
       }

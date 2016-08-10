@@ -69,7 +69,13 @@ class ImageProcessor {
                 bucket: this.s3Object.besport.bucket_out,
                 size: this.s3Object.besport.size,
                 quality: this.s3Object.besport.quality,
-                jpegOptimizer: jpegOptimizer
+                jpegOptimizer: jpegOptimizer,
+                crop: {
+                    x: this.s3Object.besport.crop.x,
+                    y: this.s3Object.besport.crop.y,
+                    width: this.s3Object.besport.crop.width,
+                    height: this.s3Object.besport.crop.height
+                }
             };
             return Promise.all([this.execResizeImage(option, imageData)]);
         };

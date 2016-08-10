@@ -34,15 +34,19 @@ class ImageResizer {
 
         const acl = this.options.acl;
 
-        if ( "size" in this.options ) {
-            params.customArgs.push("-resize");
-            params.customArgs.push(String(this.options.size) + "x" + String(this.options.size) + "^>");
-        };
-
         return new Promise((resolve, reject) => {
+          ImageMagick.identify(image, (id_err, res) => {
+            if ( "crop" in this.options ) {
+                params.customArgs.push("-crop");
+                params.customArgs.push(String(this.options.crop.width) + "%x" + String(this.options.crop.height) + "%+" + (res.width * this.options.crop.x / 100).toFixed(2) + "+" + (res.height * this.options.crop.y / 100).toFixed(2));
+            };
+            if ( "size" in this.options ) {
+                params.customArgs.push("-resize");
+                params.customArgs.push(String(this.options.size) + "x" + String(this.options.size) + "^>");
+            };
             ImageMagick.resize(params, (err, stdout, stderr) => {
-                if ( err || stderr ) {
-                    reject("ImageMagick err" + (err || stderr));
+                if ( id_err || err || stderr ) {
+                    reject("ImageMagick err" + (id_err || err || stderr));
                 } else {
                     resolve(new ImageData(
                         image.fileName,
@@ -53,6 +57,7 @@ class ImageResizer {
                     ));
                 }
             });
+          });
         });
     }
 }
