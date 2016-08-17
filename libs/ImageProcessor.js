@@ -75,7 +75,8 @@ class ImageProcessor {
                     y: this.s3Object.besport.crop.y,
                     width: this.s3Object.besport.crop.width,
                     height: this.s3Object.besport.crop.height
-                }
+                },
+                acl: 'public-read'
             };
             return Promise.all([this.execResizeImage(option, imageData)]);
         };
