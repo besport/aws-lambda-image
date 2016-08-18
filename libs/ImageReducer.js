@@ -50,7 +50,10 @@ class ImageReducer {
                     option.bucket || image.bucketName,
                     buffer,
                     image.headers,
-                    image.acl
+                    image.acl,
+                    image.type,
+                    image.width,
+                    image.height
                 ));
             })
             .catch((message) => reject(message));

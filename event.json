@@ -6,12 +6,15 @@
                "name":"besport-images-in"
             },
             "object":{
-               "key":"Y_xnDKPLJuJlaGDQB81rtyBDDuk41d5eac2d75011f1",
+               "key":"bild12.jpg",
                "size":1024
             },
             "besport":{
                "size": 64,
                "quality": 85,
+               "width": 1024,
+               "height": 768,
+               "type": "JPEG",
                "bucket_out": "besport-images/64",
                "crop": {
                   "x": 20.0,

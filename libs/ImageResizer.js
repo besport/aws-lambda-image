@@ -35,29 +35,35 @@ class ImageResizer {
         const acl = this.options.acl;
 
         return new Promise((resolve, reject) => {
-          ImageMagick.identify(image, (id_err, res) => {
             if ( "crop" in this.options ) {
                 params.customArgs.push("-crop");
-                params.customArgs.push(String(this.options.crop.width) + "%x" + String(this.options.crop.height) + "%+" + (res.width * this.options.crop.x / 100).toFixed(2) + "+" + (res.height * this.options.crop.y / 100).toFixed(2));
+                params.customArgs.push(
+                    String(this.options.crop.width) + "%x" +
+                    String(this.options.crop.height) + "%+" +
+                    (image.width * this.options.crop.x / 100).toFixed(2) + "+" +
+                    (image.height * this.options.crop.y / 100).toFixed(2)
+                );
             };
             if ( "size" in this.options ) {
                 params.customArgs.push("-resize");
                 params.customArgs.push(String(this.options.size) + "x" + String(this.options.size) + "^>");
             };
             ImageMagick.resize(params, (err, stdout, stderr) => {
-                if ( id_err || err || stderr ) {
-                    reject("ImageMagick err" + (id_err || err || stderr));
+                if ( err || stderr ) {
+                    reject("ImageMagick err" + (err || stderr));
                 } else {
                     resolve(new ImageData(
                         image.fileName,
                         image.bucketName,
                         stdout,
                         image.headers,
-                        acl
+                        acl,
+                        image.type,
+                        image.width,
+                        image.height
                     ));
                 }
             });
-          });
         });
     }
 }

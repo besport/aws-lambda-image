@@ -78,6 +78,9 @@ class ImageProcessor {
                 },
                 acl: 'public-read'
             };
+            imageData.width = this.s3Object.besport.width;
+            imageData.height = this.s3Object.besport.height;
+            imageData._type = this.s3Object.besport.type;
             return Promise.all([this.execResizeImage(option, imageData)]);
         };
 
