@@ -15,6 +15,7 @@
                "width": 1024,
                "height": 768,
                "type": "JPEG",
+               "opaque": false,
                "bucket_out": "besport-images/64",
                "crop": {
                   "x": 20.0,
