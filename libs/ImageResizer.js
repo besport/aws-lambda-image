@@ -47,10 +47,20 @@ class ImageResizer {
                     (image.height * this.options.crop.y / 100).toFixed(2)
                 );
             };
+            var new_height = undefined;
+            var new_width = undefined;
             if ( "size" in this.options ) {
                 params.customArgs.push("-resize");
-                params.customArgs.push(String(this.options.size) + "x" + String(this.options.size) + "^>");
-            };
+                if (image.width < image.height) {
+                    new_width = this.options.size;
+                    new_height = Math.round(image.height * this.options.size / image.width);
+                }
+                else {
+                    new_width  = Math.round(image.width * this.options.size / image.height);
+                    new_height = this.options.size;
+                }
+                params.customArgs.push(String(new_width) + "x" + String(new_height));
+            }
             ImageMagick.resize(params, (err, stdout, stderr) => {
                 if ( err || stderr ) {
                     reject("ImageMagick err" + (err || stderr));
@@ -61,7 +71,9 @@ class ImageResizer {
                         stdout,
                         image.headers,
                         acl,
-                        params.format
+                        params.format,
+                        new_width,
+                        new_height
                     ));
                 }
             });

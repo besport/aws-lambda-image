@@ -51,7 +51,9 @@ class ImageReducer {
                     buffer,
                     image.headers,
                     image.acl,
-                    image.type
+                    image.type,
+                    image.width,
+                    image.height
                 ));
             })
             .catch((message) => reject(message));

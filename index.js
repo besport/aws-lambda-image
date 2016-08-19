@@ -24,7 +24,9 @@ exports.handler = (event, context) => {
     processor.run(config)
     .then((proceedImages) => {
         console.log("OK, numbers of " + proceedImages.length + " images has proceeded.");
-        context.succeed("OK, numbers of " + proceedImages.length + " images has proceeded.");
+        const image = proceedImages[0];
+        context.succeed({size: Math.min(image.width, image.height),
+                         width: image.width, height: image.height});
     })
     .catch((messages) => {
         if ( messages === "Object was already processed." ) {
