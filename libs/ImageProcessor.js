@@ -71,14 +71,11 @@ class ImageProcessor {
                 quality: this.s3Object.besport.quality,
                 format: this.s3Object.besport.opaque ? "jpg" : "png",
                 jpegOptimizer: jpegOptimizer,
-                crop: {
-                    x: this.s3Object.besport.crop.x,
-                    y: this.s3Object.besport.crop.y,
-                    width: this.s3Object.besport.crop.width,
-                    height: this.s3Object.besport.crop.height
-                },
                 acl: 'public-read'
             };
+            if ( this.s3Object.besport.crop ) {
+                option.crop = this.s3Object.besport.crop;
+            }
             imageData.width = this.s3Object.besport.width;
             imageData.height = this.s3Object.besport.height;
             imageData._type = this.s3Object.besport.type;
