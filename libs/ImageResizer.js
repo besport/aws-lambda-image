@@ -35,6 +35,9 @@ class ImageResizer {
         const acl = this.options.acl;
 
         return new Promise((resolve, reject) => {
+            if ( "format" in this.options ) {
+                params.format = this.options.format;
+            }
             if ( "crop" in this.options ) {
                 params.customArgs.push("-crop");
                 params.customArgs.push(
@@ -58,9 +61,7 @@ class ImageResizer {
                         stdout,
                         image.headers,
                         acl,
-                        image.type,
-                        image.width,
-                        image.height
+                        params.format
                     ));
                 }
             });

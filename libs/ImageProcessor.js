@@ -69,6 +69,7 @@ class ImageProcessor {
                 bucket: this.s3Object.besport.bucket_out,
                 size: this.s3Object.besport.size,
                 quality: this.s3Object.besport.quality,
+                format: this.s3Object.besport.opaque ? "jpg" : "png",
                 jpegOptimizer: jpegOptimizer,
                 crop: {
                     x: this.s3Object.besport.crop.x,
