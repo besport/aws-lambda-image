@@ -27,9 +27,7 @@ class ImageResizer {
         const params = {
             srcData:   image.data.toString("binary"),
             srcFormat: image.type,
-            format:    image.type,
-            customArgs: ['+repage', '-strip', '-interlace', 'plane',
-                         '-auto-orient', '-background', 'white', '-flatten']
+            format:    image.type
         };
 
         const acl = this.options.acl;
@@ -37,6 +35,18 @@ class ImageResizer {
         return new Promise((resolve, reject) => {
             if ( "format" in this.options ) {
                 params.format = this.options.format;
+            }
+            switch ( params.format.toLowerCase() ){
+                case "jpg":
+                case "jpeg":
+                    params.customArgs = ['+repage', '-strip', '-interlace', 'plane', '-define',
+                                         'jpeg:size=' + String(2 * image.width) + "x" + String(2 * image.height),
+                                         '-auto-orient', '-background', 'white', '-flatten'];
+                    break;
+                case "png":
+                    params.customArgs = ["-background" , "none" , "+repage" ,
+                                         "-strip", "-interlace", "Plane", "-auto-orient"];
+                    break;
             }
             if ( "crop" in this.options ) {
                 params.customArgs.push("-crop");
