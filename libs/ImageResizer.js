@@ -39,11 +39,23 @@ class ImageResizer {
             if ( "format" in this.options ) {
                 params.format = this.options.format;
             }
+            var new_height = undefined;
+            var new_width = undefined;
+            if ( "size" in this.options ) {
+                if (image.width < image.height) {
+                    new_width = this.options.size;
+                    new_height = Math.round(image.height * this.options.size / image.width);
+                }
+                else {
+                    new_width  = Math.round(image.width * this.options.size / image.height);
+                    new_height = this.options.size;
+                }
+            }
             switch ( params.format.toLowerCase() ){
                 case "jpg":
                 case "jpeg":
                     params.customArgs = ['+repage', '-strip', '-interlace', 'plane', '-define',
-                                         'jpeg:size=' + String(2 * image.width) + "x" + String(2 * image.height),
+                                         'jpeg:size=' + String(2 * new_width) + "x" + String(2 * new_height),
                                          '-auto-orient', '-background', 'white', '-flatten'];
                     break;
                 case "png":
@@ -60,18 +72,8 @@ class ImageResizer {
                     (image.height * this.options.crop.y / 100).toFixed(2)
                 );
             };
-            var new_height = undefined;
-            var new_width = undefined;
             if ( "size" in this.options ) {
                 params.customArgs.push("-resize");
-                if (image.width < image.height) {
-                    new_width = this.options.size;
-                    new_height = Math.round(image.height * this.options.size / image.width);
-                }
-                else {
-                    new_width  = Math.round(image.width * this.options.size / image.height);
-                    new_height = this.options.size;
-                }
                 params.customArgs.push(String(new_width) + "x" + String(new_height));
             }
             ImageMagick.resize(params, (err, stdout, stderr) => {
