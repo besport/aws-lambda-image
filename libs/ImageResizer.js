@@ -33,6 +33,9 @@ class ImageResizer {
         const acl = this.options.acl;
 
         return new Promise((resolve, reject) => {
+            if ( "index" in this.options ) {
+                params.srcIndex = this.options.index;
+            }
             if ( "format" in this.options ) {
                 params.format = this.options.format;
             }

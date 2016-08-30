@@ -10,6 +10,7 @@
                "size":1024
             },
             "besport":{
+               "index": 0,
                "size": 64,
                "quality": 85,
                "width": 1024,

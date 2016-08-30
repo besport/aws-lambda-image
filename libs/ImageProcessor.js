@@ -67,6 +67,7 @@ class ImageProcessor {
         if ( this.s3Object.besport ) {
             var option = {
                 bucket: this.s3Object.besport.bucket_out,
+                index: this.s3Object.besport.index,
                 size: this.s3Object.besport.size,
                 quality: this.s3Object.besport.quality,
                 format: this.s3Object.besport.opaque ? "jpg" : "png",

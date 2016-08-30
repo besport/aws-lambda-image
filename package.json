@@ -14,7 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "aws-sdk": "2.3.9",
-    "imagemagick": "git://github.com/jrochel/node-imagemagick.git#no-width-height",
+    "imagemagick": "git://github.com/jrochel/node-imagemagick.git#besport",
     "lodash": "4.12.0"
   },
   "devDependencies": {
