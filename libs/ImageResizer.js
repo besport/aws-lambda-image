@@ -39,16 +39,23 @@ class ImageResizer {
             if ( "format" in this.options ) {
                 params.format = this.options.format;
             }
+            // TODO: consider cropping in these calculations!
             var new_height = undefined;
             var new_width = undefined;
             if ( "size" in this.options ) {
                 if (image.width < image.height) {
-                    new_width = this.options.size;
-                    new_height = Math.round(image.height * this.options.size / image.width);
+                    if (image.width > this.options.size && image.width * 5 < this.options.size * 6)
+                    { new_width = image.width; }
+                    else
+                    { new_width = this.options.size; }
+                    new_height = Math.round(image.height * new_width / image.width);
                 }
                 else {
-                    new_width  = Math.round(image.width * this.options.size / image.height);
-                    new_height = this.options.size;
+                    if (image.height > this.options.size && image.height * 5 < this.options.size * 6)
+                    { new_height = image.height; }
+                    else
+                    { new_height = this.options.size; }
+                    new_width  = Math.round(image.width * new_height / image.height);
                 }
             }
             switch ( params.format.toLowerCase() ){
