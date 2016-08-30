@@ -73,7 +73,8 @@ class ImageResizer {
             }
             ImageMagick.resize(params, (err, stdout, stderr) => {
                 if ( err || stderr ) {
-                    reject("ImageMagick err" + (err || stderr));
+                    params.srcData = "<truncated>";
+                    reject("ImageResizer (" + JSON.stringify(params) + "): " + (err || stderr));
                 } else {
                     resolve(new ImageData(
                         image.fileName,
