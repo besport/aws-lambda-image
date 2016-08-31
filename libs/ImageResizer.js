@@ -39,25 +39,6 @@ class ImageResizer {
             if ( "format" in this.options ) {
                 params.format = this.options.format;
             }
-            // TODO: consider cropping in these calculations!
-            var new_height = undefined;
-            var new_width = undefined;
-            if ( "size" in this.options ) {
-                if (image.width < image.height) {
-                    if (image.width > this.options.size && image.width * 5 < this.options.size * 6)
-                    { new_width = image.width; }
-                    else
-                    { new_width = this.options.size; }
-                    new_height = Math.round(image.height * new_width / image.width);
-                }
-                else {
-                    if (image.height > this.options.size && image.height * 5 < this.options.size * 6)
-                    { new_height = image.height; }
-                    else
-                    { new_height = this.options.size; }
-                    new_width  = Math.round(image.width * new_height / image.height);
-                }
-            }
             switch ( params.format.toLowerCase() ){
                 case "jpg":
                 case "jpeg":
@@ -69,6 +50,37 @@ class ImageResizer {
                                          "-strip", "-interlace", "Plane", "-auto-orient"];
                     break;
             }
+            var srcWidth  = image.width;
+            var srcHeight = image.height;
+            if ( "crop" in this.options ) {
+                srcWidth = Math.round(image.width * this.options.crop.width / 100);
+                srcHeight = Math.round(image.height * this.options.crop.height / 100);
+                params.customArgs.push("-crop");
+                params.customArgs.push(
+                    String(srcWidth) + "x" +
+                    String(srcHeight) + "+" +
+                    Math.round(image.width * this.options.crop.x / 100) + "+" +
+                    Math.round(image.height * this.options.crop.y / 100)
+                );
+            };
+            var new_height = undefined;
+            var new_width = undefined;
+            if ( "size" in this.options ) {
+                if (srcWidth < srcHeight) {
+                    if (srcWidth > this.options.size && srcWidth * 5 < this.options.size * 6)
+                    { new_width = srcWidth; }
+                    else
+                    { new_width = this.options.size; }
+                    new_height = Math.round(srcHeight * new_width / srcWidth);
+                }
+                else {
+                    if (srcHeight > this.options.size && srcHeight * 5 < this.options.size * 6)
+                    { new_height = srcHeight; }
+                    else
+                    { new_height = this.options.size; }
+                    new_width  = Math.round(srcWidth * new_height / srcHeight);
+                }
+            }
             if ( "size" in this.options ) {
                 switch ( params.srcFormat ) {
                     case "jpg":
@@ -77,15 +89,6 @@ class ImageResizer {
                         params.customArgs.push('jpeg:size=' + String(2 * new_width) + "x" + String(2 * new_height));
                 }
             }
-            if ( "crop" in this.options ) {
-                params.customArgs.push("-crop");
-                params.customArgs.push(
-                    String(this.options.crop.width) + "%x" +
-                    String(this.options.crop.height) + "%+" +
-                    Math.round(image.width * this.options.crop.x / 100) + "+" +
-                    Math.round(image.height * this.options.crop.y / 100)
-                );
-            };
             if ( "size" in this.options ) {
                 params.customArgs.push("-resize");
                 params.customArgs.push(String(new_width) + "x" + String(new_height));
