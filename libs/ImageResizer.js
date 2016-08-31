@@ -82,8 +82,8 @@ class ImageResizer {
                 params.customArgs.push(
                     String(this.options.crop.width) + "%x" +
                     String(this.options.crop.height) + "%+" +
-                    (image.width * this.options.crop.x / 100).toFixed(2) + "+" +
-                    (image.height * this.options.crop.y / 100).toFixed(2)
+                    Math.round(image.width * this.options.crop.x / 100) + "+" +
+                    Math.round(image.height * this.options.crop.y / 100)
                 );
             };
             if ( "size" in this.options ) {
