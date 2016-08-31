@@ -61,14 +61,21 @@ class ImageResizer {
             switch ( params.format.toLowerCase() ){
                 case "jpg":
                 case "jpeg":
-                    params.customArgs = ['+repage', '-strip', '-interlace', 'plane', '-define',
-                                         'jpeg:size=' + String(2 * new_width) + "x" + String(2 * new_height),
+                    params.customArgs = ['+repage', '-strip', '-interlace', 'plane',
                                          '-auto-orient', '-background', 'white', '-flatten'];
                     break;
                 case "png":
                     params.customArgs = ["-background" , "none" , "+repage" ,
                                          "-strip", "-interlace", "Plane", "-auto-orient"];
                     break;
+            }
+            if ( "size" in this.options ) {
+                switch ( params.srcFormat ) {
+                    case "jpg":
+                    case "jpeg":
+                        params.customArgs.push('-define');
+                        params.customArgs.push('jpeg:size=' + String(2 * new_width) + "x" + String(2 * new_height));
+                }
             }
             if ( "crop" in this.options ) {
                 params.customArgs.push("-crop");
