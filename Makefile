@@ -1,3 +1,5 @@
+LAMBDA_FUNCTION_NAME = resize-image
+
 .PHONY: test clean configtest
 
 lambda:

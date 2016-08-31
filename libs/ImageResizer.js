@@ -53,14 +53,14 @@ class ImageResizer {
             var srcWidth  = image.width;
             var srcHeight = image.height;
             if ( "crop" in this.options ) {
-                srcWidth = Math.round(image.width * this.options.crop.width / 100);
-                srcHeight = Math.round(image.height * this.options.crop.height / 100);
+                srcWidth = this.options.crop.width;
+                srcHeight = this.options.crop.height;
                 params.customArgs.push("-crop");
                 params.customArgs.push(
-                    String(srcWidth) + "x" +
-                    String(srcHeight) + "+" +
-                    Math.round(image.width * this.options.crop.x / 100) + "+" +
-                    Math.round(image.height * this.options.crop.y / 100)
+                    String(this.options.crop.width) + "x" +
+                    String(this.options.crop.height) + "+" +
+                    String(this.options.crop.x) + "+" +
+                    String(this.options.crop.y)
                 );
             };
             var new_height = undefined;
