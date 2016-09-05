@@ -50,6 +50,7 @@ class ImageResizer {
                                          "-strip", "-interlace", "Plane", "-auto-orient"];
                     break;
             }
+            params.customArgs.push("-quiet"); // surpress warnings
             var srcWidth  = image.width;
             var srcHeight = image.height;
             if ( "crop" in this.options ) {
