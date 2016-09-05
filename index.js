@@ -25,7 +25,7 @@ exports.handler = (event, context) => {
     .then((proceedImages) => {
         console.log("OK, numbers of " + proceedImages.length + " images has proceeded.");
         const image = proceedImages[0];
-        context.succeed({size: Math.min(image.width, image.height),
+        context.succeed({size: s3Object.besport.size,
                          width: image.width, height: image.height});
     })
     .catch((messages) => {
