@@ -3,6 +3,14 @@
 const ImageData   = require("./ImageData");
 const ImageMagick = require("imagemagick");
 
+function mimeType(format) {
+    switch (format.toLowerCase()) {
+        case "jpg": case "jpeg": return "image/jpeg";
+        case "png": return "image/png";
+    }
+    return "image/" + format;
+}
+
 class ImageResizer {
 
     /**
@@ -39,6 +47,8 @@ class ImageResizer {
             if ( "format" in this.options ) {
                 params.format = this.options.format;
             }
+            image.headers.ContentType = mimeType(params.format)
+            params.format
             switch ( params.format.toLowerCase() ){
                 case "jpg":
                 case "jpeg":
