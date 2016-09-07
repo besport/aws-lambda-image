@@ -81,14 +81,14 @@ class ImageResizer {
                     if (srcWidth > this.options.size && srcWidth * 5 < this.options.size * 6)
                     { new_width = srcWidth; }
                     else
-                    { new_width = this.options.size; }
+                    { new_width = Math.min(this.options.size, srcWidth); }
                     new_height = Math.round(srcHeight * new_width / srcWidth);
                 }
                 else {
                     if (srcHeight > this.options.size && srcHeight * 5 < this.options.size * 6)
                     { new_height = srcHeight; }
                     else
-                    { new_height = this.options.size; }
+                    { new_height = Math.min(this.options.size, srcHeight); }
                     new_width  = Math.round(srcWidth * new_height / srcHeight);
                 }
             }
