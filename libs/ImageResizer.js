@@ -47,8 +47,8 @@ class ImageResizer {
             if ( "format" in this.options ) {
                 params.format = this.options.format;
             }
-            image.headers.ContentType = mimeType(params.format)
-            params.format
+            image.headers.CacheControl = "max-age=604800";
+            image.headers.ContentType = mimeType(params.format);
             switch ( params.format.toLowerCase() ){
                 case "jpg":
                 case "jpeg":
