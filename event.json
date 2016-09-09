@@ -3,11 +3,11 @@
       {
          "s3":{
             "bucket":{
-               "name":"besport-images-in"
+               "name":"dev-images-in"
             },
             "object":{
-               "key":"bild12.jpg",
-               "size":1024
+               "key":"test.ico",
+               "size":1
             },
             "besport":{
                "index": 0,
@@ -15,14 +15,14 @@
                "quality": 85,
                "width": 1024,
                "height": 768,
-               "type": "JPEG",
+               "type": "ico",
                "opaque": false,
-               "bucket_out": "besport-images/64",
+               "bucket_out": "dev-images/64",
                "crop": {
-                  "x": 20,
-                  "y": 30,
-                  "width": 40,
-                  "height": 50
+                  "x": 10,
+                  "y": 10,
+                  "width": 80,
+                  "height": 80
                }
             }
          }
