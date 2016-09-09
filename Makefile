@@ -1,4 +1,5 @@
 LAMBDA_FUNCTION_NAME = resize-image
+LAMBDA_FUNCTION_NAME_DEV = resize-image-dev
 
 .PHONY: test clean configtest
 
@@ -16,6 +17,10 @@ lambda:
 	@echo "Create package archive..."
 	@cd build && zip -rq aws-lambda-image.zip .
 	@mv build/aws-lambda-image.zip ./
+
+uploadlambda-dev: lambda
+	@if [ -z "${LAMBDA_FUNCTION_NAME_DEV}" ]; then (echo "Please export LAMBDA_FUNCTION_NAME" && exit 1); fi
+	aws lambda update-function-code --function-name ${LAMBDA_FUNCTION_NAME_DEV} --zip-file fileb://aws-lambda-image.zip
 
 uploadlambda: lambda
 	@if [ -z "${LAMBDA_FUNCTION_NAME}" ]; then (echo "Please export LAMBDA_FUNCTION_NAME" && exit 1); fi
