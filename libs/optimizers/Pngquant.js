@@ -14,7 +14,8 @@ class Pngquant extends Optimizer {
         super();
 
         this.command = this.findBin("pngquant");
-        this.args    = ["--speed=1", "256", "-"];
+//        this.args    = ["--speed=1", "256", "-"];
+        this.args    = ["-Q", "95", "-"];
     }
 }
 
