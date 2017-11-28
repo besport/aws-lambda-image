@@ -74,7 +74,7 @@ class ImageReducer {
         switch ( type ) {
             case "png":
                 streams.push(new Pngquant());
-                streams.push(new Pngout());
+//                streams.push(new Pngout());
                 break;
             case "jpg":
             case "jpeg":
