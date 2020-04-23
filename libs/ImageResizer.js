@@ -36,7 +36,7 @@ class ImageResizer {
     exec(image) {
         const tmpobj = tmp.fileSync();
         const params = {
-            srcPath: tmpobj.name,
+            srcPath: image.type + ":" + tmpobj.name,
             srcFormat: image.type,
             format:    image.type
         };
